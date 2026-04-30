@@ -8,9 +8,23 @@ PROJECT_ROOT = Path(__file__).parent
 @task
 def fetch(c):
     """
-    Retrieve all data assets.
+    Download source data archive from Zenodo and extract into source_data/.
     """
-    pass
+    import urllib.request
+    import zipfile
+
+    url = "https://zenodo.org/api/records/19924319/files-archive"
+    source_dir = PROJECT_ROOT / c.config.get("source_data_dir")
+    source_dir.mkdir(parents=True, exist_ok=True)
+    archive = source_dir / "archive.zip"
+
+    print(f"Downloading {url} ...")
+    urllib.request.urlretrieve(url, archive)
+    print(f"Extracting to {source_dir} ...")
+    with zipfile.ZipFile(archive) as zf:
+        zf.extractall(source_dir)
+    archive.unlink()
+    print("Fetch complete.")
 
 
 @task
