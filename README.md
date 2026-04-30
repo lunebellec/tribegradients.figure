@@ -10,12 +10,19 @@ uv sync
 
 ## Usage
 
+Pre-generated outputs are committed to this repository. To reproduce the figures from scratch:
+
 ```bash
-uv run invoke fetch                    # Download source data
+uv run invoke clean                    # Remove committed outputs from output_data/
+uv run invoke fetch                    # Download source data from Zenodo
 uv run invoke run                      # Full analysis pipeline
-uv run invoke run-visualize-gradients  # Generate gradient brain maps in output_data/gradients/
-uv run invoke clean                    # Remove *.png from output_data/
 uv run invoke --list                   # Show all available tasks
+```
+
+To browse the outputs interactively:
+
+```bash
+uv run invoke dashboard                # Serve dashboard at http://localhost:8000/dashboard/
 ```
 
 ## Data
