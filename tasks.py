@@ -1,40 +1,33 @@
 from pathlib import Path
 from invoke import task
 
+
 @task
 def fetch(c):
     """
     Retrieve all data assets.
     """
-    from airoh.utils import download_data
-    download_data(c, "papers")
+    pass
+
 
 @task
-def run_simulation(c):
+def run_visualize_gradients(c):
     """
-    Run a small simulation.
+    Generate gradient brain maps for each participant, movie, and chunk.
     """
-    output_dir = Path(c.config.get("output_data_dir"))
-    from analysis.simulation import simulation
-    simulation(output_dir)
+    from analysis.visualize_gradients import visualize_gradients
+    source_dir = Path(c.config.get("source_data_dir"))
+    output_dir = Path(c.config.get("output_data_dir")) / "gradients"
+    visualize_gradients(source_dir, output_dir)
 
-@task(pre=[run_simulation])
-def run_notebooks(c):
-    """
-    Generate figures from the simulation output using a notebook.
-    """
-    from airoh.utils import run_notebooks as airoh_run_notebooks, ensure_dir_exist
 
-    notebooks_dir = Path(c.config.get("notebooks_dir"))
-    output_dir = Path(c.config.get("output_data_dir")).resolve()
-    source_dir = Path(c.config.get("source_data_dir")).resolve()
-
-    ensure_dir_exist(c, "output_data_dir")
-    airoh_run_notebooks(c, notebooks_dir, output_dir, keys=["source_data_dir", "output_data_dir"])
-
-@task(pre=[run_simulation, run_notebooks])
+@task(pre=[run_visualize_gradients])
 def run(c):
-    print("all analyses completed")
+    """
+    Run the full analysis pipeline.
+    """
+    print("All analyses completed.")
+
 
 @task
 def clean(c):
@@ -43,4 +36,3 @@ def clean(c):
     """
     from airoh.utils import clean_folder
     clean_folder(c, "output_data_dir", "*.png")
-    clean_folder(c, "output_data_dir", "*.csv")

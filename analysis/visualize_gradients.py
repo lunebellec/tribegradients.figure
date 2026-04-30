@@ -5,31 +5,36 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 from nilearn.datasets import fetch_atlas_schaefer_2018, load_fsaverage
-from nilearn.image import iter_img
-from nilearn.maskers import NiftiLabelsMasker
 from nilearn.plotting import plot_surf_stat_map
 from nilearn.surface import SurfaceImage
 
 
 def _setup_atlas(data_dir: Path):
     schaefer_atlas = fetch_atlas_schaefer_2018(n_rois=1000, yeo_networks=7, data_dir=data_dir)
-    masker = NiftiLabelsMasker(
-        labels_img=schaefer_atlas['maps'], standardize=True, memory='nilearn_cache'
+    fsaverage = load_fsaverage(data_dir=data_dir)
+    atlas_surf = SurfaceImage.from_volume(mesh=fsaverage["pial"], volume_img=schaefer_atlas['maps'])
+    left_labels = np.round(atlas_surf.data.parts['left']).astype(int)
+    right_labels = np.round(atlas_surf.data.parts['right']).astype(int)
+    return (left_labels, right_labels), fsaverage
+
+
+def _grad_to_surf(grad_values, left_labels, right_labels, fsaverage):
+    def _map(labels):
+        out = np.zeros(len(labels))
+        mask = labels > 0
+        out[mask] = grad_values[labels[mask] - 1]
+        return out
+    return SurfaceImage(
+        mesh=fsaverage["pial"],
+        data={'left': _map(left_labels), 'right': _map(right_labels)},
     )
-    masker.fit()
-    return masker, load_fsaverage(data_dir=data_dir)
 
 
-def _save_gradient_map(gradients, title, path, masker, fsaverage, cmap="viridis_r"):
-    """Save a 4×4 surface figure (4 gradients × left/right × lateral/medial views)."""
-    # gradients: (1000, 4) — inverse_transform expects (n_samples, n_features)
-    img = masker.inverse_transform(gradients.T)  # (4, 1000) → 4D NIfTI (x,y,z,4)
-
+def _save_gradient_map(gradients, title, path, atlas_labels, fsaverage, cmap="viridis_r"):
+    left_labels, right_labels = atlas_labels
     fig, ax = plt.subplots(4, 4, figsize=(10, 10), subplot_kw={'projection': '3d'})
-    for i, cur_nii in enumerate(iter_img(img)):
-        if i == 4:
-            break
-        cur_surf = SurfaceImage.from_volume(mesh=fsaverage["pial"], volume_img=cur_nii)
+    for i in range(min(4, gradients.shape[1])):
+        cur_surf = _grad_to_surf(gradients[:, i], left_labels, right_labels, fsaverage)
         common = dict(threshold=None, colorbar=False, cmap=cmap, figure=fig)
         plot_surf_stat_map(stat_map=cur_surf, view="lateral", hemi='left',  axes=ax[i, 0], **common)
         plot_surf_stat_map(stat_map=cur_surf, view="medial",  hemi='left',  axes=ax[i, 1], **common)
@@ -43,7 +48,7 @@ def _save_gradient_map(gradients, title, path, masker, fsaverage, cmap="viridis_
 
 
 def visualize_gradients(source_dir: Path, output_dir: Path):
-    masker, fsaverage = _setup_atlas(source_dir / "nilearn")
+    atlas_labels, fsaverage = _setup_atlas(source_dir / "nilearn")
 
     for npz_file in sorted(source_dir.glob("all_gradients_*.npz")):
         subject = npz_file.stem.replace("all_gradients_", "")
@@ -64,7 +69,7 @@ def visualize_gradients(source_dir: Path, output_dir: Path):
                 movie_gm.mean(axis=0),
                 f"{subject} — {movie} (average)",
                 subj_dir / f"{movie}_average.png",
-                masker, fsaverage,
+                atlas_labels, fsaverage,
             )
             print(f"  {movie}: average saved")
 
@@ -73,6 +78,6 @@ def visualize_gradients(source_dir: Path, output_dir: Path):
                     chunk_gm,
                     f"{subject} — {label}",
                     subj_dir / f"{label}.png",
-                    masker, fsaverage,
+                    atlas_labels, fsaverage,
                 )
             print(f"  {movie}: {len(movie_labels)} chunks saved")
