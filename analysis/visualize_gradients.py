@@ -59,6 +59,20 @@ def _render_gradient(lh_data, rh_data, lh_path, rh_path, cmap, vmin=-0.08, vmax=
     return img
 
 
+def _save_colorbar(output_dir, cmap="viridis_r", vmin=-0.08, vmax=0.08):
+    cbar_path = output_dir / "colorbar.png"
+    if cbar_path.exists():
+        return
+    fig, ax = plt.subplots(figsize=(4, 0.4))
+    fig.subplots_adjust(bottom=0.5)
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
+    sm.set_array([])
+    fig.colorbar(sm, cax=ax, orientation='horizontal')
+    plt.savefig(cbar_path, dpi=100, bbox_inches='tight', pad_inches=0.05)
+    plt.close(fig)
+    print(f"  saved {cbar_path}")
+
+
 def _save_gradient_map(gradients, output_dir, subject, movie, chunk_label, atlas_labels, lh_path, rh_path, cmap="viridis_r"):
     vmin, vmax = -0.08, 0.08
     surf_data = _interpolate_gradients(gradients, atlas_labels)
@@ -72,9 +86,6 @@ def _save_gradient_map(gradients, output_dir, subject, movie, chunk_label, atlas
         fig, ax = plt.subplots(1, 1, figsize=(w / 200, h / 200))
         ax.imshow(img)
         ax.axis('off')
-        sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
-        sm.set_array([])
-        fig.colorbar(sm, ax=ax, orientation='horizontal', fraction=0.04, pad=0.01, aspect=40)
         plt.savefig(grad_path, dpi=100, bbox_inches='tight', pad_inches=0.05)
         plt.close(fig)
         print(f"    saved {grad_path}")
@@ -115,5 +126,7 @@ def _process_subject(npz_file, output_dir, atlas_labels, lh_path, rh_path, smoke
 def visualize_gradients(source_dir: Path, output_dir: Path, smoke: bool = False):
     print("Setting up atlas...")
     atlas_labels, lh_path, rh_path = _setup_atlas(source_dir / "nilearn")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    _save_colorbar(output_dir)
     for npz_file in sorted(source_dir.glob("all_gradients_*.npz")):
         _process_subject(npz_file, output_dir, atlas_labels, lh_path, rh_path, smoke)
