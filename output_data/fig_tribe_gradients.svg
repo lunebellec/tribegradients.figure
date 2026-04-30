@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="fig_tribe_gradients.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.0456808"
+     inkscape:cx="63.594934"
+     inkscape:cy="271.5934"
+     inkscape:window-width="1553"
+     inkscape:window-height="748"
+     inkscape:window-x="331"
+     inkscape:window-y="167"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="322.38564"
+       y="118.8003"
+       width="85.527212"
+       height="176.90359"
+       id="rect33054" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="-90.193428"
+       y="5.2242031"
+       id="text2934"><tspan
+         sodipodi:role="line"
+         id="tspan2932"
+         style="stroke-width:0.264583"
+         x="-90.193428"
+         y="5.2242031"><tspan
+   style="font-weight:bold"
+   id="tspan39052">a</tspan> Chunk average, between movies, within subject (sub-01, gradient 1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="-90.193428"
+       y="59.923405"
+       id="text2934-3"><tspan
+         sodipodi:role="line"
+         id="tspan2932-6"
+         style="stroke-width:0.264583"
+         x="-90.193428"
+         y="59.923405"><tspan
+   style="font-weight:bold"
+   id="tspan39052-7">a</tspan> Chunk average, between movies, within subject (sub-01, gradient 1)</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text33052"
+       style="line-height:1.25;font-family:sans-serif;font-size:16px;white-space:pre;shape-inside:url(#rect33054)" />
+    <g
+       id="g35976">
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="-77.693077"
+         y="12.787326"
+         id="text5140"><tspan
+           sodipodi:role="line"
+           id="tspan5138"
+           style="stroke-width:0.264583"
+           x="-77.693077"
+           y="12.787326">Bourne</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="-29.065504"
+         y="12.787326"
+         id="text6794"><tspan
+           sodipodi:role="line"
+           id="tspan6792"
+           style="stroke-width:0.264583"
+           x="-29.065504"
+           y="12.787326">Figures</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="23.331347"
+         y="12.787326"
+         id="text9240"><tspan
+           sodipodi:role="line"
+           id="tspan9238"
+           style="stroke-width:0.264583"
+           x="23.331347"
+           y="12.787326">Life</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="71.170341"
+         y="12.787326"
+         id="text13006"><tspan
+           sodipodi:role="line"
+           id="tspan13004"
+           style="stroke-width:0.264583"
+           x="71.170341"
+           y="12.787326">Wolf</tspan></text>
+      <image
+         width="39.957916"
+         height="39.957916"
+         preserveAspectRatio="none"
+         xlink:href="gradients/subject-01/movie-bourne/gradient-1_chunk-average.png"
+         id="image26790"
+         x="-90.011528"
+         y="15.685855"
+         style="stroke-width:2.02143" />
+      <image
+         width="39.957916"
+         height="39.957916"
+         preserveAspectRatio="none"
+         xlink:href="gradients/subject-01/movie-figures/gradient-1_chunk-average.png"
+         id="image26818"
+         x="-41.374653"
+         y="15.685855"
+         style="stroke-width:2.02143" />
+      <image
+         width="39.957916"
+         height="39.957916"
+         preserveAspectRatio="none"
+         xlink:href="gradients/subject-01/movie-life/gradient-1_chunk-average.png"
+         id="image31728"
+         x="7.2622247"
+         y="15.685855"
+         style="stroke-width:2.02143" />
+      <image
+         width="39.957916"
+         height="39.957916"
+         preserveAspectRatio="none"
+         xlink:href="gradients/subject-01/movie-wolf/gradient-1_chunk-average.png"
+         id="image34548"
+         x="55.899105"
+         y="15.685855"
+         style="stroke-width:2.02143" />
+    </g>
+  </g>
+</svg>

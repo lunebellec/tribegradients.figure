@@ -77,7 +77,9 @@ def _save_gradient_map(gradients, output_dir, subject, movie, chunk_label, atlas
     vmin, vmax = -0.08, 0.08
     surf_data = _interpolate_gradients(gradients, atlas_labels)
     for i, (lh, rh) in enumerate(surf_data):
-        grad_path = output_dir / f"subject-{_sanitize_sub(subject)}-movie-{movie}_gradient-{i + 1}_chunk-{chunk_label}.png"
+        sub_dir = output_dir / f"subject-{_sanitize_sub(subject)}" / f"movie-{movie}"
+        sub_dir.mkdir(parents=True, exist_ok=True)
+        grad_path = sub_dir / f"gradient-{i + 1}_chunk-{chunk_label}.png"
         if grad_path.exists():
             print(f"  {grad_path} already exist, skipped")
             continue
