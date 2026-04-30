@@ -2,7 +2,6 @@
 *.tar.gz 
 source_data/*npz
 source_data/nilearn
-output_data/gradients
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

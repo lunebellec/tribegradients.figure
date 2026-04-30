@@ -2,6 +2,8 @@ import shutil
 from pathlib import Path
 from invoke import task
 
+PROJECT_ROOT = Path(__file__).parent
+
 
 @task
 def fetch(c):
@@ -18,8 +20,8 @@ def run_visualize_gradients(c, smoke=False):
     Use --smoke to run a minimal check (average of first movie only).
     """
     from analysis.visualize_gradients import visualize_gradients
-    source_dir = Path(c.config.get("source_data_dir"))
-    output_dir = Path(c.config.get("output_data_dir")) / "gradients"
+    source_dir = PROJECT_ROOT / c.config.get("source_data_dir")
+    output_dir = PROJECT_ROOT / c.config.get("output_data_dir") / "gradients"
     visualize_gradients(source_dir, output_dir, smoke=smoke)
 
 
@@ -30,8 +32,8 @@ def run_gradient_correlations(c):
     Generates one figure per gradient (1–4) in output_data/gradient_correlations/.
     """
     from analysis.gradient_correlations import gradient_correlations
-    source_dir = Path(c.config.get("source_data_dir"))
-    output_dir = Path(c.config.get("output_data_dir")) / "gradient_correlations"
+    source_dir = PROJECT_ROOT / c.config.get("source_data_dir")
+    output_dir = PROJECT_ROOT / c.config.get("output_data_dir") / "gradient_correlations"
     gradient_correlations(source_dir, output_dir)
 
 
@@ -48,7 +50,7 @@ def clean_visualize_gradients(c):
     """
     Remove all gradient visualization output so the task can be re-run from scratch.
     """
-    output_dir = Path(c.config.get("output_data_dir")) / "gradients"
+    output_dir = PROJECT_ROOT / c.config.get("output_data_dir") / "gradients"
     if output_dir.exists():
         shutil.rmtree(output_dir)
         print(f"Removed {output_dir}")
@@ -61,7 +63,7 @@ def clean_gradient_correlations(c):
     """
     Remove all gradient correlations output so the task can be re-run from scratch.
     """
-    output_dir = Path(c.config.get("output_data_dir")) / "gradient_correlations"
+    output_dir = PROJECT_ROOT / c.config.get("output_data_dir") / "gradient_correlations"
     if output_dir.exists():
         shutil.rmtree(output_dir)
         print(f"Removed {output_dir}")
@@ -78,11 +80,22 @@ def clean(c):
 
 
 @task
+def dashboard(c, port=8000):
+    """
+    Serve the project from the root so dashboard/index.html can load images via ../output_data/.
+    Open http://localhost:<port>/dashboard/ in your browser.
+    """
+    import subprocess
+    print(f"Serving at http://localhost:{port}/dashboard/")
+    subprocess.run(["python", "-m", "http.server", str(port)], cwd=PROJECT_ROOT)
+
+
+@task
 def clean_source(c):
     """
     Remove downloaded source data (*.npz and nilearn/). WARNING: re-run fetch to restore.
     """
-    source_dir = Path(c.config.get("source_data_dir"))
+    source_dir = PROJECT_ROOT / c.config.get("source_data_dir")
     for npz in source_dir.glob("*.npz"):
         npz.unlink()
         print(f"Removed {npz}")
