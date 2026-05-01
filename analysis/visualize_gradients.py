@@ -73,8 +73,7 @@ def _save_colorbar(output_dir, cmap="viridis_r", vmin=-0.08, vmax=0.08):
     print(f"  saved {cbar_path}")
 
 
-def _save_gradient_map(gradients, output_dir, subject, movie, chunk_label, atlas_labels, lh_path, rh_path, cmap="viridis_r"):
-    vmin, vmax = -0.08, 0.08
+def _save_gradient_map(gradients, output_dir, subject, movie, chunk_label, atlas_labels, lh_path, rh_path, cmap="viridis_r", vmin=-0.08, vmax=0.08):
     surf_data = _interpolate_gradients(gradients, atlas_labels)
     for i, (lh, rh) in enumerate(surf_data):
         sub_dir = output_dir / f"subject-{_sanitize_sub(subject)}" / f"movie-{movie}"
@@ -132,3 +131,16 @@ def visualize_gradients(source_dir: Path, output_dir: Path, smoke: bool = False)
     _save_colorbar(output_dir)
     for npz_file in sorted(source_dir.glob("all_gradients_*.npz")):
         _process_subject(npz_file, output_dir, atlas_labels, lh_path, rh_path, smoke)
+
+
+def visualize_reference_gradients(npz_path: Path, output_dir: Path, nilearn_data_dir: Path):
+    print("Setting up atlas...")
+    atlas_labels, lh_path, rh_path = _setup_atlas(nilearn_data_dir)
+    data = np.load(npz_path)
+    gradients = data['refgradients']  # (1000, 4)
+    vmax = float(np.percentile(np.abs(gradients), 95))
+    vmin = -vmax
+    output_dir.mkdir(parents=True, exist_ok=True)
+    _save_colorbar(output_dir, vmin=vmin, vmax=vmax)
+    _save_gradient_map(gradients, output_dir, "samara2023", "reference", "average",
+                       atlas_labels, lh_path, rh_path, vmin=vmin, vmax=vmax)

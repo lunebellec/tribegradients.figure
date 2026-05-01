@@ -1,8 +1,5 @@
 # invoke.yaml
 
-# Notebooks folders
-notebooks_dir: notebooks
-
 # source data folders
 source_data_dir: source_data
 

@@ -24,7 +24,7 @@ uv run invoke --list                   # Show all available tasks
 
 ## Architecture
 
-- `invoke.yaml` — path config (`output_data_dir`, `source_data_dir`, `notebooks_dir`)
+- `invoke.yaml` — path config (`output_data_dir`, `source_data_dir`)
 - `tasks.py` — invoke tasks; `run` chains all analysis steps via `pre=`
 - `analysis/visualize_gradients.py` — projects Schaefer atlas to surface once, then maps gradient values per-vertex for each subject/movie/chunk
 - `source_data/` and `output_data/` — excluded from Git by `.gitignore`

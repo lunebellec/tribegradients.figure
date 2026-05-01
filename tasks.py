@@ -40,6 +40,20 @@ def run_visualize_gradients(c, smoke=False):
 
 
 @task
+def run_visualize_reference_gradients(c, npz_path):
+    """
+    Generate brain maps for reference gradients from an external NPZ file.
+    The NPZ must contain a 'refgradients' array of shape (1000, 4).
+    Outputs are saved to source_data/gradients_samara2023/ (not output_data, since
+    the raw gradients are not redistributable but the images are).
+    """
+    from analysis.visualize_gradients import visualize_reference_gradients
+    source_dir = PROJECT_ROOT / c.config.get("source_data_dir")
+    output_dir = source_dir / "gradients_reference"
+    visualize_reference_gradients(Path(npz_path), output_dir, source_dir / "nilearn")
+
+
+@task
 def run_gradient_correlations(c):
     """
     Compute pairwise spatial correlations between gradient maps across comparison types.
