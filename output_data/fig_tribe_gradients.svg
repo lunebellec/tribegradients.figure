@@ -3,8 +3,8 @@
 
 <svg
    width="243.84317mm"
-   height="260.64731mm"
-   viewBox="0 0 243.84317 260.64731"
+   height="298.15439mm"
+   viewBox="0 0 243.84317 298.15439"
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
@@ -27,9 +27,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.36970399"
-     inkscape:cx="-954.81793"
-     inkscape:cy="-75.736267"
+     inkscape:zoom="1.0456808"
+     inkscape:cx="627.3425"
+     inkscape:cy="364.35593"
      inkscape:window-width="2560"
      inkscape:window-height="1008"
      inkscape:window-x="0"
@@ -44,11 +44,11 @@
      fit-margin-right="0"
      fit-margin-bottom="0">
     <sodipodi:guide
-       position="108.52191,-31.928777"
+       position="108.52191,5.5783034"
        orientation="0,-1"
        id="guide76756" />
     <sodipodi:guide
-       position="20.640779,207.93157"
+       position="20.640779,245.43865"
        orientation="0,-1"
        id="guide2162" />
   </sodipodi:namedview>
@@ -5388,5 +5388,51 @@
          style="stroke-width:0.264583"
          x="202.93372"
          y="64.561211">gradient 4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;white-space:pre;inline-size:243.222;stroke-width:0.264583"
+       x="5.4328084"
+       y="124.49402"
+       id="text39315" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;white-space:pre;inline-size:246.665;stroke-width:0.264583"
+       x="4.1710272"
+       y="131.35788"
+       id="text55260"
+       transform="translate(1.2074924,-5.3477621)"><tspan
+         x="4.1710272"
+         y="131.35788"
+         id="tspan74393"><tspan
+   style="font-weight:bold"
+   id="tspan74387">Figure 1</tspan> - <tspan
+   style="font-weight:bold"
+   id="tspan74389">(a)</tspan> Reference cortical gradients derived from movie-watching data in Samara et al. (2023). <tspan
+   style="font-weight:bold"
+   id="tspan74391">(b)</tspan> Average </tspan><tspan
+         x="4.1710272"
+         y="136.64954"
+         id="tspan74395">gradients estimated from empirical fMRI data for one participant during one movie, showing that the main spatial </tspan><tspan
+         x="4.1710272"
+         y="141.9412"
+         id="tspan74399">patterns are recovered at the individual level. <tspan
+   style="font-weight:bold"
+   id="tspan74397">(c)</tspan> Gradient 1 for the same movie across participants and TRIBEv2 </tspan><tspan
+         x="4.1710272"
+         y="147.23286"
+         id="tspan74401">predictions. The principal sensorimotor-to-transmodal organization is reproducible across individuals and is also </tspan><tspan
+         x="4.1710272"
+         y="152.52451"
+         id="tspan74405">recapitulated by TRIBEv2. <tspan
+   style="font-weight:bold"
+   id="tspan74403">(d)</tspan> Gradient 1 across movies for one participant, illustrating within-subject stability </tspan><tspan
+         x="4.1710272"
+         y="157.81617"
+         id="tspan74409">across different narrative contexts. <tspan
+   style="font-weight:bold"
+   id="tspan74407">(e)</tspan> Spatial similarity of gradient maps across movie segments, comparing </tspan><tspan
+         x="4.1710272"
+         y="163.10782"
+         id="tspan74411">within-subject and between-subject empirical fMRI gradients, TRIBEv2 gradients, and average gradients. </tspan></text>
   </g>
 </svg>
