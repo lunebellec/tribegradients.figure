@@ -1,6 +1,6 @@
 # tribe_gradients.figure
 
-Visualizes functional connectivity gradients computed from fMRI data recorded while subjects watched naturalistic movie stimuli (TRIBE dataset).
+Visualizes functional connectivity gradients computed from fMRI data recorded while subjects watched naturalistic movie stimuli (TRIBE dataset). Interactive dashboard to explore the gradient maps: https://lunebellec.github.io/tribegradients.figure/
 
 ## Setup
 
